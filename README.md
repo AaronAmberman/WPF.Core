@@ -1,2 +1,2 @@
 # WPF.Core
-The classes I always create in a new WPF project that utilizes MVVM.
+The classes I regularly create inside a WPF project.
