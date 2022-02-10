@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Windows.Input;
 
-namespace RsaPpkManager
+namespace Wpf.Core
 {
     /// <summary>A command that allows for the use of methods.</summary>
     /// <seealso cref="ICommand" />
