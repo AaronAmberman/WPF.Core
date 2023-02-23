@@ -9,7 +9,7 @@ namespace Wpf.Core
     /// <seealso cref="IValueConverter"/>
     public class ArithmeticConverter : IValueConverter
     {
-        /// <summary>Converters the value using the specified arithmetic operations.</summary>
+        /// <summary>Converts the value using the specified arithmetic operations.</summary>
         /// <param name="value">The value produced by the binding source.</param>
         /// <param name="targetType">The type of the binding target property.</param>
         /// <param name="parameter">The converter parameter to use.</param>
@@ -65,7 +65,7 @@ namespace Wpf.Core
             return DependencyProperty.UnsetValue;
         }
 
-        /// <summary>Converters the value using the specified arithmetic operations.</summary>
+        /// <summary>Converts the value using the specified arithmetic operations.</summary>
         /// <param name="value">The value produced by the binding source.</param>
         /// <param name="targetType">The type of the binding target property.</param>
         /// <param name="parameter">The converter parameter to use.</param>
