@@ -28,7 +28,7 @@ namespace Wpf.Core
     /// to be in order to automatically update the UI.
     /// </para>
     /// </summary>
-    public class PropertyChangeNotifier : DynamicObject, INotifyPropertyChanged
+    public class AutomaticViewModel : DynamicObject, INotifyPropertyChanged
     {
         #region Fields
 
@@ -46,10 +46,10 @@ namespace Wpf.Core
 
         #region Constructors
 
-        /// <summary>Initializes a new instance of the <see cref="PropertyChangeNotifier"/> class.</summary>
+        /// <summary>Initializes a new instance of the <see cref="AutomaticViewModel"/> class.</summary>
         /// <param name="objectToWrap">The object to wrap with property changes.</param>
         /// <exception cref="ArgumentNullException">objectToWrap is null.</exception>
-        public PropertyChangeNotifier(object objectToWrap)
+        public AutomaticViewModel(object objectToWrap)
         {
             if (objectToWrap == null) throw new ArgumentNullException(nameof(objectToWrap));
 
@@ -59,10 +59,10 @@ namespace Wpf.Core
             properties = objectToWrap.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(p => p.CanWrite).ToList();
         }
 
-        /// <summary>Initializes a new instance of the <see cref="PropertyChangeNotifier"/> class.</summary>
+        /// <summary>Initializes a new instance of the <see cref="AutomaticViewModel"/> class.</summary>
         /// <param name="objectToWrap">The object to wrap with property changes.</param>
         /// <exception cref="ArgumentNullException">objectToWrap is null.</exception>
-        public PropertyChangeNotifier(object objectToWrap, BindingFlags propertyFlags)
+        public AutomaticViewModel(object objectToWrap, BindingFlags propertyFlags)
         {
             if (objectToWrap == null) throw new ArgumentNullException(nameof(objectToWrap));
 
