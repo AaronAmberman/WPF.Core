@@ -17,7 +17,7 @@ namespace Wpf.Core
         /// <returns>A converted value. If the method returns null, the valid null value is used.</returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is double)
+            if (targetType == typeof(double))
             {
                 double val = (double)value;
 
