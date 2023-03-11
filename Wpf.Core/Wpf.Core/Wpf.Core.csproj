@@ -49,6 +49,7 @@
     <Compile Include="EqualsMultiConverter.cs" />
     <Compile Include="ExtendedObservableCollection.cs" />
     <Compile Include="ExtensionMethods.cs" />
+    <Compile Include="LogicalVisualTreeHelper.cs" />
     <Compile Include="NotEqualsConverter.cs" />
     <Compile Include="NotEqualsMultiConverter.cs" />
     <Compile Include="RelayCommand.cs" />
