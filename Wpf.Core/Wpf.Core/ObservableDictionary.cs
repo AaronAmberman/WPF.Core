@@ -52,9 +52,12 @@ namespace WPF.Core
 
                     backingDictionary[key] = value;
 
-                    OnCollectionValueChanged(NotifyCollectionChangedAction.Replace, new KeyValuePair<TKey, TValue>(key, value), new KeyValuePair<TKey, TValue>(key, oldValue));
                     OnPropertyChanged(INDEXER_PROPERTY);
                     OnPropertyChanged(VALUES_PROPERTY);
+
+                    OnCollectionValueChanged(NotifyCollectionChangedAction.Replace,
+                        new KeyValuePair<TKey, TValue>(key, value), new KeyValuePair<TKey, TValue>(key, oldValue),
+                        backingDictionary.Keys.ToList().IndexOf(key));
 
                     isBeingModified = false;
                 }
@@ -165,11 +168,11 @@ namespace WPF.Core
 
             backingDictionary.Add(key, value);
 
-            OnCollectionAddRemove(NotifyCollectionChangedAction.Add, new KeyValuePair<TKey, TValue>(key, value));
             OnPropertyChanged(COUNT_PROPERTY);
             OnPropertyChanged(INDEXER_PROPERTY);
             OnPropertyChanged(KEYS_PROPERTY);
             OnPropertyChanged(VALUES_PROPERTY);
+            OnCollectionAdd(NotifyCollectionChangedAction.Add, new KeyValuePair<TKey, TValue>(key, value));
             
             isBeingModified = false;
         }
@@ -207,11 +210,11 @@ namespace WPF.Core
 
             backingDictionary.Clear();
 
-            OnCollectionReset(NotifyCollectionChangedAction.Reset);
             OnPropertyChanged(COUNT_PROPERTY);
             OnPropertyChanged(INDEXER_PROPERTY);
             OnPropertyChanged(KEYS_PROPERTY);
             OnPropertyChanged(VALUES_PROPERTY);
+            OnCollectionReset(NotifyCollectionChangedAction.Reset);
 
             isBeingModified = false;
         }
@@ -273,20 +276,30 @@ namespace WPF.Core
         }
 
         /// <summary>Call when adding an item or removing an item to send the appropriate signal.</summary>
-        /// <param name="action">Add or Remove.</param>
-        /// <param name="item">The item being added or removed.</param>
-        protected virtual void OnCollectionAddRemove(NotifyCollectionChangedAction action, object item)
+        /// <param name="action">Add.</param>
+        /// <param name="item">The item being added.</param>
+        protected virtual void OnCollectionAdd(NotifyCollectionChangedAction action, object item)
         {
             CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(action, item));
+        }
+
+        /// <summary>Call when adding an item or removing an item to send the appropriate signal.</summary>
+        /// <param name="action">Remove.</param>
+        /// <param name="item">The item being removed.</param>
+        /// <param name="index">The index of the item that was removed.</param>
+        protected virtual void OnCollectionRemove(NotifyCollectionChangedAction action, object item, int index)
+        {
+            CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(action, item, index));
         }
 
         /// <summary>Call when updating an item with the this indexer.</summary>
         /// <param name="action">Should be Replace.</param>
         /// <param name="newItem">The new item.</param>
         /// <param name="oldItem">The item being replaced.</param>
-        protected virtual void OnCollectionValueChanged(NotifyCollectionChangedAction action, object newItem, object oldItem)
+        /// <param name="index">The index of the item that was updated.</param>
+        protected virtual void OnCollectionValueChanged(NotifyCollectionChangedAction action, object newItem, object oldItem, int index)
         {
-            CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(action, newItem, oldItem));
+            CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(action, newItem, oldItem, index));
         }
 
         /// <summary>Call when a property changes value.</summary>
@@ -311,14 +324,15 @@ namespace WPF.Core
             isBeingModified = true;
 
             TValue value = backingDictionary[key];
+            int index = backingDictionary.Keys.ToList().IndexOf(key);
 
             bool result = backingDictionary.Remove(key);
 
-            OnCollectionAddRemove(NotifyCollectionChangedAction.Remove, new KeyValuePair<TKey, TValue>(key, value));
             OnPropertyChanged(COUNT_PROPERTY);
             OnPropertyChanged(INDEXER_PROPERTY);
             OnPropertyChanged(KEYS_PROPERTY);
             OnPropertyChanged(VALUES_PROPERTY);
+            OnCollectionRemove(NotifyCollectionChangedAction.Remove, new KeyValuePair<TKey, TValue>(key, value), index);
 
             isBeingModified = false;
 
