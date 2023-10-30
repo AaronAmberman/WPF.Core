@@ -8,6 +8,10 @@ using System.Linq;
 
 namespace WPF.Core
 {
+    /*
+     * This class doesn't work for some reason. There is no automatic update of the UI. Everything seems proper. WTF!?!?!?!?
+     */
+
     /// <summary>A dictionary that reports changes.</summary>
     /// <typeparam name="TKey">The type of key,</typeparam>
     /// <typeparam name="TValue">The type of value.</typeparam>
