@@ -32,6 +32,13 @@ namespace Wpf.Core
 
                     string arithmeticValue = operation.Substring(1, operation.Length - 1);
 
+                    /*
+                     * Sometimes the culture doesn't allow for periods to be used, so we need to change our periods 
+                     * to decimals...if needed
+                     */
+                    //if (arithmeticValue.Contains(".") && CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator == ",")
+                    //    arithmeticValue = arithmeticValue.Replace(".", ",");
+
                     double arithmeticVal;
                     bool success = double.TryParse(arithmeticValue, out arithmeticVal);
 
