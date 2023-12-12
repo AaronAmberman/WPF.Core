@@ -42,8 +42,7 @@ namespace WPF.Core
         /// <exception cref="ObjectDisposedException">The object instance has been disposed.</exception>
         public virtual void Debounce()
         {
-            if (disposedValue)
-                throw new ObjectDisposedException("WPF.Core.Debouncer");
+            ThrowIfDisposed();
 
             // if the timer is running, stop it and start it again
             // this makes the interval reset
@@ -54,8 +53,7 @@ namespace WPF.Core
 
         protected virtual void Dispose(bool disposing)
         {
-            if (disposedValue)
-                throw new ObjectDisposedException("WPF.Core.Debouncer");
+            ThrowIfDisposed();
 
             if (!disposedValue)
             {
@@ -73,8 +71,7 @@ namespace WPF.Core
         /// <exception cref="ObjectDisposedException">The object instance has been disposed.</exception>
         public void Dispose()
         {
-            if (disposedValue)
-                throw new ObjectDisposedException("WPF.Core.Debouncer");
+            ThrowIfDisposed();
 
             Dispose(true);
 
@@ -86,6 +83,12 @@ namespace WPF.Core
             timer.Stop();
 
             action();
+        }
+
+        protected virtual void ThrowIfDisposed()
+        {
+            if (disposedValue)
+                throw new ObjectDisposedException("WPF.Core.Debouncer");
         }
 
         #endregion
