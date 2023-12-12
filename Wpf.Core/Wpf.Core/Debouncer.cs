@@ -14,6 +14,13 @@ namespace WPF.Core
 
         #endregion
 
+        #region Events
+
+        /// <summary>Occurs when the method is triggered.</summary>
+        public event EventHandler Ellapsed;
+
+        #endregion
+
         #region Constructors
 
         /// <summary>Initializes a new instance of the <see cref="Debouncer"/> class.</summary>
@@ -34,6 +41,12 @@ namespace WPF.Core
         #endregion
 
         #region Methods
+
+        /// <summary>Stops the internal timer so the method will never be called.</summary>
+        public void Cancel()
+        {
+            timer.Stop();
+        }
 
         /// <summary>
         /// Throttles/Debounces the method invocation so it only happens once in the given interval. Calling this 
@@ -83,6 +96,8 @@ namespace WPF.Core
             timer.Stop();
 
             action();
+
+            Ellapsed?.Invoke(this, e);
         }
 
         protected virtual void ThrowIfDisposed()
