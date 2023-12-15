@@ -33,8 +33,8 @@ namespace Wpf.Core
                     string arithmeticValue = operation.Substring(1, operation.Length - 1);
 
                     /*
-                     * Sometimes the culture doesn't allow for periods to be used, so we need to change our periods 
-                     * to decimals...if needed
+                     * Sometimes the culture doesn't allow for decimals to be used, so we need to change our decimals 
+                     * to whatever the culutre needs
                      */
                     //if (arithmeticValue.Contains(".") && CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator != ".")
                     //    arithmeticValue = arithmeticValue.Replace(".", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
