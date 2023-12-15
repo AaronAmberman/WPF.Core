@@ -36,8 +36,8 @@ namespace Wpf.Core
                      * Sometimes the culture doesn't allow for periods to be used, so we need to change our periods 
                      * to decimals...if needed
                      */
-                    //if (arithmeticValue.Contains(".") && CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator == ",")
-                    //    arithmeticValue = arithmeticValue.Replace(".", ",");
+                    //if (arithmeticValue.Contains(".") && CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator != ".")
+                    //    arithmeticValue = arithmeticValue.Replace(".", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
 
                     double arithmeticVal;
                     bool success = double.TryParse(arithmeticValue, out arithmeticVal);
