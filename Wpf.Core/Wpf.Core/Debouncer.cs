@@ -45,6 +45,8 @@ namespace WPF.Core
         /// <summary>Stops the internal timer so the method will never be called.</summary>
         public void Cancel()
         {
+            ThrowIfDisposed();
+
             timer.Stop();
         }
 
